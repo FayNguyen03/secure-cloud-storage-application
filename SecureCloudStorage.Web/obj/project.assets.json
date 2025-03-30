@@ -1,0 +1,156 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "SecureCloudStorage.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "SecureCloudStorage.Domain": "1.0.0",
+          "SecureCloudStorage.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SecureCloudStorage.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecureCloudStorage.Application.dll": {}
+        }
+      },
+      "SecureCloudStorage.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/SecureCloudStorage.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecureCloudStorage.Domain.dll": {}
+        }
+      },
+      "SecureCloudStorage.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "SecureCloudStorage.Application": "1.0.0",
+          "SecureCloudStorage.Domain": "1.0.0",
+          "SecureCloudStorage.Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/SecureCloudStorage.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecureCloudStorage.Infrastructure.dll": {}
+        }
+      },
+      "SecureCloudStorage.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/SecureCloudStorage.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SecureCloudStorage.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SecureCloudStorage.Application/1.0.0": {
+      "type": "project",
+      "path": "../SecureCloudStorage.Application/SecureCloudStorage.Application.csproj",
+      "msbuildProject": "../SecureCloudStorage.Application/SecureCloudStorage.Application.csproj"
+    },
+    "SecureCloudStorage.Domain/1.0.0": {
+      "type": "project",
+      "path": "../SecureCloudStorage.Domain/SecureCloudStorage.Domain.csproj",
+      "msbuildProject": "../SecureCloudStorage.Domain/SecureCloudStorage.Domain.csproj"
+    },
+    "SecureCloudStorage.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../SecureCloudStorage.Infrastructure/SecureCloudStorage.Infrastructure.csproj",
+      "msbuildProject": "../SecureCloudStorage.Infrastructure/SecureCloudStorage.Infrastructure.csproj"
+    },
+    "SecureCloudStorage.Shared/1.0.0": {
+      "type": "project",
+      "path": "../SecureCloudStorage.Shared/SecureCloudStorage.Shared.csproj",
+      "msbuildProject": "../SecureCloudStorage.Shared/SecureCloudStorage.Shared.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "SecureCloudStorage.Application >= 1.0.0",
+      "SecureCloudStorage.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/Users/faynguyen03/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/SecureCloudStorage.Web.csproj",
+      "projectName": "SecureCloudStorage.Web",
+      "projectPath": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/SecureCloudStorage.Web.csproj",
+      "packagesPath": "/Users/faynguyen03/.nuget/packages/",
+      "outputPath": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/faynguyen03/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Application/SecureCloudStorage.Application.csproj": {
+              "projectPath": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Application/SecureCloudStorage.Application.csproj"
+            },
+            "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Infrastructure/SecureCloudStorage.Infrastructure.csproj": {
+              "projectPath": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Infrastructure/SecureCloudStorage.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
