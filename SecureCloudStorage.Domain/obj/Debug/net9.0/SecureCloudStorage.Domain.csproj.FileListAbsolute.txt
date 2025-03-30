@@ -1,0 +1,12 @@
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/bin/Debug/net9.0/SecureCloudStorage.Domain.deps.json
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/bin/Debug/net9.0/SecureCloudStorage.Domain.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/bin/Debug/net9.0/SecureCloudStorage.Domain.pdb
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.AssemblyInfoInputs.cache
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.AssemblyInfo.cs
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.csproj.CoreCompileInputs.cache
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.sourcelink.json
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/refint/SecureCloudStorage.Domain.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.pdb
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/ref/SecureCloudStorage.Domain.dll

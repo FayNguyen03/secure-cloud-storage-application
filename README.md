@@ -22,7 +22,9 @@ SecureCloudStorage.sln
 │
 ├── SecureCloudStorage.Web/              # MVC Web App
 │   ├── Controllers/
+|   |   └── FileController.cs
 │   ├── Models/
+|   |   ├── ErrorViewModel.cs
 |   |   └── EncryptedFileViewModel.cs
 │   ├── Views/
 │   │   ├── Home/
