@@ -10,3 +10,8 @@
     <input type="text" name="RecipientEmails" required />
     <button type="submit">Upload & Encrypt</button>
 </form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info mt-3">@ViewBag.Message</div>
+}

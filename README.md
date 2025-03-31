@@ -22,6 +22,7 @@ SecureCloudStorage.sln
 │
 ├── SecureCloudStorage.Web/              # MVC Web App
 │   ├── Controllers/
+|   |   ├── HomeController.cs
 |   |   └── FileController.cs
 │   ├── Models/
 |   |   ├── ErrorViewModel.cs
@@ -31,7 +32,8 @@ SecureCloudStorage.sln
 │   │   ├── Files/
 |   |   |   ├── Upload.cshtml
 │   │   └── Shared/
-│   ├── wwwroot/                         # JS, CSS, Bootstrap
+│   ├── wwwroot/                         # JS, CSS, Bootstrap, Uploaded files
+|   |   └── uploads/
 │   ├── appsettings.json
 │   └── Program.cs
 │
