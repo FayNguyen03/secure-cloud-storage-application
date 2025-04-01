@@ -26,11 +26,13 @@ SecureCloudStorage.sln
 |   |   └── FileController.cs
 │   ├── Models/
 |   |   ├── ErrorViewModel.cs
+|   |   ├── AdminViewModel.cs
 |   |   └── EncryptedFileViewModel.cs
 │   ├── Views/
 │   │   ├── Home/
 │   │   ├── Files/
 |   |   |   ├── Upload.cshtml
+|   |   |   └── 
 │   │   └── Shared/
 │   ├── wwwroot/                         # JS, CSS, Bootstrap, Uploaded files
 |   |   └── uploads/

@@ -4,10 +4,10 @@
 @model EncryptedFileViewModel
 
 <form asp-action="Upload" method="post" enctype="multipart/form-data">
-    <label>Select File:</label>
+    <label style="">Browse File From Your Computer:</label>
     <input type="file" name="File" required />
     <label>Recipients (comma separated emails):</label>
-    <input type="text" name="RecipientEmails" required />
+    <input type="text" name="RecipientEmails" required style="display: ;"/>
     <button type="submit">Upload & Encrypt</button>
 </form>
 
