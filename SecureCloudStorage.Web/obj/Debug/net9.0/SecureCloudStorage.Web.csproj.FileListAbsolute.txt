@@ -106,3 +106,8 @@
 /Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/obj/Debug/net9.0/SecureCloudStorage.Web.pdb
 /Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/obj/Debug/net9.0/SecureCloudStorage.Web.genruntimeconfig.cache
 /Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/obj/Debug/net9.0/ref/SecureCloudStorage.Web.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/bin/Debug/net9.0/MySqlConnector.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/bin/Debug/net9.0/Pomelo.EntityFrameworkCore.MySql.dll

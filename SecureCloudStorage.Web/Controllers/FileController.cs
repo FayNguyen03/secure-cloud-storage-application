@@ -6,7 +6,7 @@ using SecureCloudStorage.Domain;
 using SecureCloudStorage.Web.Models;
 
 
-namespace SecureCloudStorage.Web.Controllers;
+namespace SecureCloudStorage.Web.Controllers{
 
 public class FilesController : Controller
 {
@@ -55,3 +55,4 @@ public class FilesController : Controller
     public IActionResult UploadSuccess() => View();
 }
 
+}

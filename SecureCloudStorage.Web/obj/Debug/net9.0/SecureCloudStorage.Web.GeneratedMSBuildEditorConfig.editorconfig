@@ -20,12 +20,12 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Files/Upload.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRmlsZXMvVXBsb2FkLmNzaHRtbA==
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/AdminView/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5WaWV3L1JlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Home/AdminRegister.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BZG1pblJlZ2lzdGVyLmNzaHRtbA==
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/File/Upload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRmlsZS9VcGxvYWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Home/Index.cshtml]

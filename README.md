@@ -41,6 +41,7 @@ SecureCloudStorage.sln
 │
 ├── SecureCloudStorage.Application/     # Business logic (services, DTOs) 
 |   ├── IEncryptionService.cs
+|   ├── CertificateGenerationService.cs
 │   └── EncryptionService.cs
 ├── SecureCloudStorage.Infrastructure/   # Cloud SDKs, crypto, certs
 ├── SecureCloudStorage.Domain/           # Core entities (FileMetadata, UserCert)

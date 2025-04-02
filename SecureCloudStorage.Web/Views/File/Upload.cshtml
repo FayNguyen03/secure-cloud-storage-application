@@ -4,9 +4,17 @@
 @model EncryptedFileViewModel
 
 <form asp-action="Upload" method="post" enctype="multipart/form-data">
-    <label>Select File:</label>
+    <label style="">Browse File From Your Computer:</label>
+    <br/><br/>
     <input type="file" name="File" required />
+    <br/><br/>
     <label>Recipients (comma separated emails):</label>
+    <br/><br/>
     <input type="text" name="RecipientEmails" required />
+    <br/><br/>
     <button type="submit">Upload & Encrypt</button>
 </form>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info mt-3">@ViewBag.Message</div>
+}
