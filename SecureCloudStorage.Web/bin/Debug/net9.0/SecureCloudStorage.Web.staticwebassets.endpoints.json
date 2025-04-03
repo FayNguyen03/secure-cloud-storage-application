@@ -301,6 +301,170 @@
       ]
     },
     {
+      "Route": "certs-private/tran5@gmail.com.pfx",
+      "AssetFile": "certs-private/tran5@gmail.com.pfx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-pkcs12"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE="
+        }
+      ]
+    },
+    {
+      "Route": "certs-private/tran5@gmail.com.w9yqz1o461.pfx",
+      "AssetFile": "certs-private/tran5@gmail.com.pfx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-pkcs12"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w9yqz1o461"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE="
+        },
+        {
+          "Name": "label",
+          "Value": "certs-private/tran5@gmail.com.pfx"
+        }
+      ]
+    },
+    {
+      "Route": "certs/tran5@gmail.com.cer",
+      "AssetFile": "certs/tran5@gmail.com.cer",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw="
+        }
+      ]
+    },
+    {
+      "Route": "certs/tran5@gmail.com.kw97qa6gx5.cer",
+      "AssetFile": "certs/tran5@gmail.com.cer",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kw97qa6gx5"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw="
+        },
+        {
+          "Name": "label",
+          "Value": "certs/tran5@gmail.com.cer"
+        }
+      ]
+    },
+    {
       "Route": "css/site.b9sayid5wm.css",
       "AssetFile": "css/site.css.gz",
       "Selectors": [

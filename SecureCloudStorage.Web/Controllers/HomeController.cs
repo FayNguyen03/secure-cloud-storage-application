@@ -8,8 +8,6 @@ using SecureCloudStorage.Web.Models;
 
 public class HomeController : Controller
 {
-
-    private readonly IEncryptionService _encryptionService;
     public IActionResult Index()
     {
         return View();

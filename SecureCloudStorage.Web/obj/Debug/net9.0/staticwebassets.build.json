@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fBRcW4SIoDIXcAroEFOm5fOd/rFzar1FO3RgBjYmQBs=",
+  "Hash": "tj5mzRbIfgoPqktB56UTO0Icw6ZcoPwjS0isgOTxV98=",
   "Source": "SecureCloudStorage.Web",
   "BasePath": "_content/SecureCloudStorage.Web",
   "Mode": "Default",
@@ -1403,6 +1403,48 @@
       "OriginalItemSpec": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/obj/Debug/net9.0/scopedcss/projectbundle/SecureCloudStorage.Web.bundle.scp.css"
     },
     {
+      "Identity": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs-private/tran5@gmail.com.pfx",
+      "SourceId": "SecureCloudStorage.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/",
+      "BasePath": "_content/SecureCloudStorage.Web",
+      "RelativePath": "certs-private/tran5@gmail.com#[.{fingerprint}]?.pfx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "w9yqz1o461",
+      "Integrity": "/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/certs-private/tran5@gmail.com.pfx"
+    },
+    {
+      "Identity": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs/tran5@gmail.com.cer",
+      "SourceId": "SecureCloudStorage.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/",
+      "BasePath": "_content/SecureCloudStorage.Web",
+      "RelativePath": "certs/tran5@gmail.com#[.{fingerprint}]?.cer",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kw97qa6gx5",
+      "Integrity": "5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/certs/tran5@gmail.com.cer"
+    },
+    {
       "Identity": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/css/site.css",
       "SourceId": "SecureCloudStorage.Web",
       "SourceType": "Discovered",
@@ -2727,6 +2769,170 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "certs-private/tran5@gmail.com.pfx",
+      "AssetFile": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs-private/tran5@gmail.com.pfx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-pkcs12"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE="
+        }
+      ]
+    },
+    {
+      "Route": "certs-private/tran5@gmail.com.w9yqz1o461.pfx",
+      "AssetFile": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs-private/tran5@gmail.com.pfx",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2359"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-pkcs12"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w9yqz1o461"
+        },
+        {
+          "Name": "label",
+          "Value": "certs-private/tran5@gmail.com.pfx"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Kh0NEmJTHHFnmH2+cr3/ZUTM0HiFMHcr2jCV2/6uIE="
+        }
+      ]
+    },
+    {
+      "Route": "certs/tran5@gmail.com.cer",
+      "AssetFile": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs/tran5@gmail.com.cer",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw="
+        }
+      ]
+    },
+    {
+      "Route": "certs/tran5@gmail.com.kw97qa6gx5.cer",
+      "AssetFile": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs/tran5@gmail.com.cer",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "764"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 23:44:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kw97qa6gx5"
+        },
+        {
+          "Name": "label",
+          "Value": "certs/tran5@gmail.com.cer"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5E99Nz0uNacZ4CAbEsVvvhD+aANTJ8wyaPiAsBxLkqw="
+        }
+      ]
+    },
     {
       "Route": "css/site.b9sayid5wm.css",
       "AssetFile": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/obj/Debug/net9.0/compressed/4adqg69big-b9sayid5wm.gz",

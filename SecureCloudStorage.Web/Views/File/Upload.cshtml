@@ -6,13 +6,13 @@
 <form asp-action="Upload" method="post" enctype="multipart/form-data">
     <label style="">Browse File From Your Computer:</label>
     <br/><br/>
-    <input type="file" name="File" required />
+    <input type="file" name="File" required/>
     <br/><br/>
     <label>Recipients (comma separated emails):</label>
     <br/><br/>
     <input type="text" name="RecipientEmails" required />
     <br/><br/>
-    <button type="submit">Upload & Encrypt</button>
+    <button class="btn btn-primary" type="submit">Upload & Encrypt</button>
 </form>
 @if (ViewBag.Message != null)
 {

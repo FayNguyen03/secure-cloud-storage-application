@@ -8,11 +8,11 @@ using SecureCloudStorage.Web.Models;
 
 namespace SecureCloudStorage.Web.Controllers{
 
-public class FilesController : Controller
+public class FileController : Controller
 {
     private readonly IEncryptionService _encryptionService;
 
-    public FilesController(IEncryptionService encryptionService)
+    public FileController(IEncryptionService encryptionService)
     {
         _encryptionService = encryptionService;
     }
@@ -39,14 +39,14 @@ public class FilesController : Controller
         var recipients = model.RecipientEmails.Select(email => new UserCertificate
         {
             Email = email,
-            PublicKey = System.IO.File.ReadAllBytes($"certs/{email}.cer")
+            PublicKey = System.IO.File.ReadAllBytes($"wwwroot/certs/{email}.cer")
         }).ToList();
 
         //encrypt the file and write it into .enc file
         var (encryptedFile, metadata) = _encryptionService.EncryptFile(fileBytes, recipients);
-        System.IO.File.WriteAllBytes($"uploads/{model.File.FileName}.enc", encryptedFile);
+        System.IO.File.WriteAllBytes($"wwwroot/uploads/{model.File.FileName}.enc", encryptedFile);
         //write metadata (IV + per-user keys) as .meta.json
-        System.IO.File.WriteAllText($"uploads/{model.File.FileName}.meta.json", JsonSerializer.Serialize(metadata));
+        System.IO.File.WriteAllText($"wwwroot/uploads/{model.File.FileName}.meta.json", JsonSerializer.Serialize(metadata));
         //show the upload successfully page
         
         return RedirectToAction("UploadSuccess");

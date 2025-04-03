@@ -1,6 +1,7 @@
 using SecureCloudStorage.Domain;
 using System.ComponentModel;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 namespace SecureCloudStorage.Application;
 
 public class EncryptionService: IEncryptionService{
@@ -19,9 +20,8 @@ public class EncryptionService: IEncryptionService{
         //Encrypt RSA key for each user
         var encryptedKeys = new Dictionary<string, byte[]>();
         foreach (var user in recipients){
-            //
-            using var rsa = RSA.Create();
-            rsa.ImportSubjectPublicKeyInfo(user.PublicKey, out _);
+            var cert = new X509Certificate2(user.PublicKey);
+            using var rsa = cert.GetRSAPublicKey();
             var encryptedKey = rsa.Encrypt(aes.Key, RSAEncryptionPadding.OaepSHA256);
             encryptedKeys[user.Email] = encryptedKey;
         }

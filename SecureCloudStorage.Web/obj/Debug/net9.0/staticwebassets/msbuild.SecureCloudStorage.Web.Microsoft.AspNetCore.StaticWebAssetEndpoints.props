@@ -1,5 +1,29 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/SecureCloudStorage.Web/certs-private/tran5@gmail.com.pfx">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\certs-private\tran5@gmail.com.pfx'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-/Kh0NEmJTHHFnmH2\u002Bcr3/ZUTM0HiFMHcr2jCV2/6uIE="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2359"},{"Name":"Content-Type","Value":"application/x-pkcs12"},{"Name":"ETag","Value":"\u0022/Kh0NEmJTHHFnmH2\u002Bcr3/ZUTM0HiFMHcr2jCV2/6uIE=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 23:44:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/SecureCloudStorage.Web/certs-private/tran5@gmail.com.w9yqz1o461.pfx">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\certs-private\tran5@gmail.com.pfx'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"w9yqz1o461"},{"Name":"integrity","Value":"sha256-/Kh0NEmJTHHFnmH2\u002Bcr3/ZUTM0HiFMHcr2jCV2/6uIE="},{"Name":"label","Value":"_content/SecureCloudStorage.Web/certs-private/tran5@gmail.com.pfx"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2359"},{"Name":"Content-Type","Value":"application/x-pkcs12"},{"Name":"ETag","Value":"\u0022/Kh0NEmJTHHFnmH2\u002Bcr3/ZUTM0HiFMHcr2jCV2/6uIE=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 23:44:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/SecureCloudStorage.Web/certs/tran5@gmail.com.cer">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\certs\tran5@gmail.com.cer'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-5E99Nz0uNacZ4CAbEsVvvhD\u002BaANTJ8wyaPiAsBxLkqw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"764"},{"Name":"Content-Type","Value":"application/octet-stream"},{"Name":"ETag","Value":"\u00225E99Nz0uNacZ4CAbEsVvvhD\u002BaANTJ8wyaPiAsBxLkqw=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 23:44:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/SecureCloudStorage.Web/certs/tran5@gmail.com.kw97qa6gx5.cer">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\certs\tran5@gmail.com.cer'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"kw97qa6gx5"},{"Name":"integrity","Value":"sha256-5E99Nz0uNacZ4CAbEsVvvhD\u002BaANTJ8wyaPiAsBxLkqw="},{"Name":"label","Value":"_content/SecureCloudStorage.Web/certs/tran5@gmail.com.cer"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"764"},{"Name":"Content-Type","Value":"application/octet-stream"},{"Name":"ETag","Value":"\u00225E99Nz0uNacZ4CAbEsVvvhD\u002BaANTJ8wyaPiAsBxLkqw=\u0022"},{"Name":"Last-Modified","Value":"Wed, 02 Apr 2025 23:44:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/SecureCloudStorage.Web/css/site.b9sayid5wm.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
