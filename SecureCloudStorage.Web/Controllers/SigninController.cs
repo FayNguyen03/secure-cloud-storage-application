@@ -38,7 +38,7 @@ public class SigninController : Controller
             return View(model);
         }
 
-        HttpContext.Session.SetString("UserEmail", user.Email);
+        HttpContext.Session.SetInt32("UserID", user.Id);
 
         return RedirectToAction("Index", "Home");
     }

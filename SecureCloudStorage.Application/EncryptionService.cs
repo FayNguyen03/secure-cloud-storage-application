@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace SecureCloudStorage.Application;
 
 public class EncryptionService: IEncryptionService{
-    public (byte[] EncryptedFile, FileMetadata Metadata) EncryptFile(byte[] fileData, List<UserCertificate> recipients){
+    public (byte[] EncryptedFile, FileMetadata Metadata) EncryptFile(byte[] fileData, List<User> recipients){
         using var aes = Aes.Create();
         
         aes.GenerateIV();
