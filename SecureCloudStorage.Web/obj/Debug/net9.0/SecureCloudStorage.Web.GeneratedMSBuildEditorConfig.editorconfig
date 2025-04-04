@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SecureCloudStorage.Web
 build_property.RootNamespace = SecureCloudStorage.Web
@@ -19,14 +27,6 @@ build_property.MSBuildProjectDirectory = /Users/faynguyen03/Documents/TCD/NETWOR
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
-
-[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/AdminView/Register.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5WaWV3L1JlZ2lzdGVyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/AdminView/RegisterSuccessfully.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5WaWV3L1JlZ2lzdGVyU3VjY2Vzc2Z1bGx5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/File/Upload.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRmlsZS9VcGxvYWQuY3NodG1s
@@ -44,12 +44,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Register/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVnaXN0ZXIvUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Register/RegisterSuccessfully.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVnaXN0ZXIvUmVnaXN0ZXJTdWNjZXNzZnVsbHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Signin/Signin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2lnbmluL1NpZ25pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/_ViewImports.cshtml]

@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Register Page";
+}
+@model RegisterViewModel
+<h2>Register A New User<i class='fas fa-portrait' style='font-size:16px'></i></h2>
+<!-- implement the location -->
+<form asp-action="Register" method="post" enctype="multipart/form-data">
+    <label style="">First Name <br/><input type="text" style="margin-left: 5px; width=10px;" name="FirstName" required/></label>
+    <br/><br/>
+    <label style="">Last Name <br/><input type="text"  style="margin-left: 5px; width=10px;" name="LastName" required/></label>
+    <br/><br/>
+    <label style="">Email <br/><input type="text" name="Email" style="margin-left: 5px; width=10px;"  required/></label>
+    <br/><br/>
+    <label style="">Password <br/><input type="text" name="Password" style="margin-left: 5px; width=10px;"  required/></label>
+    <br/><br/>
+    <button type="submit" class="btn btn-primary btn-success">Register</a>
+</form>
+
+@if (ViewBag.Message != null){
+    <div class="alert alert-success">@ViewBag.Message</div>
+}

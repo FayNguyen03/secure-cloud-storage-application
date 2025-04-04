@@ -10,3 +10,6 @@
 /Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/refint/SecureCloudStorage.Domain.dll
 /Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.pdb
 /Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/ref/SecureCloudStorage.Domain.dll
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.csproj.AssemblyReference.cache
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/bin/Debug/net9.0/SecureCloudStorage.Domain.runtimeconfig.json
+/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Domain/obj/Debug/net9.0/SecureCloudStorage.Domain.genruntimeconfig.cache

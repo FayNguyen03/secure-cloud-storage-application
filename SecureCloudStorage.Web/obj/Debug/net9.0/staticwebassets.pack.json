@@ -5,14 +5,6 @@
       "PackagePath": "staticwebassets/SecureCloudStorage.Web.25nm4z4g2l.bundle.scp.css"
     },
     {
-      "Id": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs-private/tran5@gmail.com.pfx",
-      "PackagePath": "staticwebassets/certs-private/tran5@gmail.com.pfx"
-    },
-    {
-      "Id": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/certs/tran5@gmail.com.cer",
-      "PackagePath": "staticwebassets/certs/tran5@gmail.com.cer"
-    },
-    {
       "Id": "/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

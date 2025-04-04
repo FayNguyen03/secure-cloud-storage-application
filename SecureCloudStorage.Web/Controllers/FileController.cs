@@ -30,6 +30,10 @@ public class FileController : Controller
         if (model.File == null || model.RecipientEmails.Count == 0)
             return View(model);
 
+        var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
+        var filePath = Path.Combine(storageBase, "uploads", $"{model.File.FileName}.enc");
+
+        var metadataPath = Path.Combine(storageBase, "metadata", $"{model.File.FileName}.meta.json");
         //read file into bytes
         using var ms = new MemoryStream();
         await model.File.CopyToAsync(ms);
@@ -39,20 +43,24 @@ public class FileController : Controller
         var recipients = model.RecipientEmails.Select(email => new UserCertificate
         {
             Email = email,
-            PublicKey = System.IO.File.ReadAllBytes($"wwwroot/certs/{email}.cer")
+            PublicKey = System.IO.File.ReadAllBytes(Path.Combine(storageBase, "certs", $"{email}.cer"))
         }).ToList();
 
-        //encrypt the file and write it into .enc file
+        
         var (encryptedFile, metadata) = _encryptionService.EncryptFile(fileBytes, recipients);
-        System.IO.File.WriteAllBytes($"wwwroot/uploads/{model.File.FileName}.enc", encryptedFile);
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+        //encrypt the file and write it into .enc file
+        System.IO.File.WriteAllBytes(filePath, encryptedFile);
+
+        Directory.CreateDirectory(Path.GetDirectoryName(metadataPath)!);
         //write metadata (IV + per-user keys) as .meta.json
-        System.IO.File.WriteAllText($"wwwroot/uploads/{model.File.FileName}.meta.json", JsonSerializer.Serialize(metadata));
+        System.IO.File.WriteAllText(metadataPath, JsonSerializer.Serialize(metadata));
         //show the upload successfully page
         
-        return RedirectToAction("UploadSuccess");
+        return RedirectToAction("UploadSuccessfully");
     }
 
-    public IActionResult UploadSuccess() => View();
+    public IActionResult UploadSuccessfully() => View();
 }
 
 }

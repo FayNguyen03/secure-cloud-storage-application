@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecureCloudStorage.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c77683c2e7784a009c26a2b07111a0c5d279dc83")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9807fad92518eab7251fe4a20aa6871378b75445")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecureCloudStorage.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecureCloudStorage.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

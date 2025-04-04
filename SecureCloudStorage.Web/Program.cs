@@ -1,11 +1,22 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
+using SecureCloudStorage.Domain;
 using SecureCloudStorage.Application;
+using SecureCloudStorage.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<CertificateGenerationService>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("MySQLConnection"),
+        new MySqlServerVersion(new Version(9, 2, 0)) 
+    ));
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
+builder.Services.AddScoped<CertificateGenerationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +30,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

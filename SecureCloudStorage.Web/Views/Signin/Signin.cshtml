@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Sign In Page";
+}
+@model SigninViewModel
+<h2>Sign In<i class='fas fa-portrait' style='font-size:16px'></i></h2>
+<!-- implement the location -->
+<form asp-action="Signin" method="post" enctype="multipart/form-data">
+    <label style="">Email <br/><input type="text" style="margin-left: 5px; width=10px;" name="Email" required/></label>
+    <br/><br/>
+    <label style="">Password <br/><input type="text"  style="margin-left: 5px; width=10px;" name="Password" required/></label>
+    <br/><br/>
+    <button type="submit">Sign In</button>
+</form>
+
+@if (ViewBag.Message != null){
+    <div class="alert alert-success">@ViewBag.Message</div>
+}
