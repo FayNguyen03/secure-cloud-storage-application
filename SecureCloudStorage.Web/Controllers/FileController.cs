@@ -29,7 +29,8 @@ public class FileController : Controller
     [HttpPost]
     public async Task<IActionResult> Upload(EncryptedFileViewModel model)
     {
-        int? uploaderId = HttpContext.Session.GetInt32("UserId");
+        var uploader = _context.Users
+            .Where(u => u.Email == HttpContext.Session.GetString("Email")).ToList();
 
         var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
 
@@ -42,11 +43,20 @@ public class FileController : Controller
         var recipients = _context.Users
             .Where(u => emails.Contains(u.Email))
             .ToList();
-
+        var foundEmails = recipients.Select(r => r.Email).ToHashSet();
+        var missingEmails = emails.Where(e => !foundEmails.Contains(e)).ToList();
+        recipients = recipients.Concat(uploader).
+                                GroupBy(u => u.Email).
+                                Select(g => g.First()).
+                                ToList();
+        if (missingEmails.Any())
+        {
+            ViewBag.MissingRecipients = string.Join(", ", missingEmails);
+        }
         foreach (var file in model.Files){
 
             var filePath = Path.Combine(storageBase, "uploads", $"{file.FileName}.enc");
-
+            
             var metadataPath = Path.Combine(storageBase, "metadata", $"{file.FileName}.meta.json");
             //read file into bytes
             using var ms = new MemoryStream();
@@ -67,9 +77,10 @@ public class FileController : Controller
                 EncryptedPath = filePath,
                 MetadataPath = metadataPath,
                 UploadedAt = DateTime.UtcNow,
-                UploaderId = (int)uploaderId
+                UploaderId = (int)uploader[0].Id
             };
             _context.EncryptedFiles.Add(encryptedFileEntry);
+            await _context.SaveChangesAsync();
             foreach (var recipient in recipients)
             {
                 _context.UserFileAccesses.Add(new UserFileAccess
@@ -97,7 +108,7 @@ public class FileController : Controller
                                                 UploadedAt = file.UploadedAt,
                                                 UploaderName = file.Uploader.FirstName + " " + file.Uploader.LastName,
                                                 Downloadable = (userId != null) && file.AccessList.Any(a => a.UserId == userId)
-                                            });
+                                            }).ToList();
         return View(files);
     }
     public IActionResult UploadSuccessfully() => View();

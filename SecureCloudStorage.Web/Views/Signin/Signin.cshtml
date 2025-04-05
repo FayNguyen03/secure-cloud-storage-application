@@ -9,9 +9,9 @@
     <br/><br/>
     <label style="">Password <br/><input type="password"  style="margin-left: 5px; width=10px;" name="Password" required/></label>
     <br/><br/>
-    <button type="submit">Sign In</button>
+    <button class="btn btn-primary btn-info" type="submit">Sign In</button>
 </form>
 
-@if (ViewBag.Message != null){
-    <div class="alert alert-success">@ViewBag.Message</div>
+@if (ViewBag.error != null){
+    <div class="alert alert-warning">@ViewBag.error</div>
 }

@@ -33,7 +33,22 @@ public class EncryptionService: IEncryptionService{
         });
     }
 
+    public byte[] DecryptAESKey(byte[] encryptedKey, byte[] privateKey)
+    {
+        using var rsa = RSA.Create();
+        rsa.ImportPkcs8PrivateKey(privateKey, out _);
+        return rsa.Decrypt(encryptedKey, RSAEncryptionPadding.OaepSHA256);
+    }
+
     public byte[]DecryptFile (byte[] encryptedData, byte[] initializationVector, byte[] encryptedAesKey, byte[] privateKey){
-        return null;
+        using var aes = Aes.Create();
+        aes.Key = DecryptAESKey(encryptedAesKey, privateKey);
+        aes.IV = initializationVector;
+
+        using var ms = new MemoryStream(encryptedData);
+        using var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
+        using var output = new MemoryStream();
+        cs.CopyTo(output);
+        return output.ToArray();
     }
 }

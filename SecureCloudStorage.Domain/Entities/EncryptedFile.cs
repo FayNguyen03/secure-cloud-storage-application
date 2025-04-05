@@ -10,9 +10,9 @@ public class EncryptedFile
     public string FileName { get; set; }
     [Column("encrypted_path")]
     public string EncryptedPath { get; set; }
-    [Column("meta_data")]
+    [Column("metadata_path")]
     public string MetadataPath { get; set; }
-    [Column("upload_ad")]
+    [Column("upload_at")]
     public DateTime UploadedAt { get; set; }
     [Column("uploader_id")]
     public int UploaderId { get; set; }

@@ -10,6 +10,6 @@ public class UserFileAccess
     public int FileId { get; set; }
     public EncryptedFile File { get; set; }
     
-    [Column("encrypted_id")]
+    [Column("encrypted_aes")]
     public byte[] EncryptedAesKey { get; set; }
 }

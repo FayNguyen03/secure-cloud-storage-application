@@ -1,5 +1,6 @@
 ﻿@{
-    var userId = Context.Session.GetInt32("UserId");
+    var user = Context.Session.GetString("User");
+    Console.WriteLine(user);
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -29,12 +30,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Intruction</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Instruction</a>
                         </li>
-                        @if (userId != null)
+                        @if (user != null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="File" asp-action="Upload">Upload File</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="File" asp-action="DisplayFiles">File Uploaded Gallery</a>
                             </li>
                         }
                         else{
@@ -47,6 +51,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                         }
                         
                     </ul>
+                    @if(user != null){
+                    <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" >Welcome, @user</a>
+                            </li>
+                    </ul>
+                    }
                 </div>
             </div>
         </nav>

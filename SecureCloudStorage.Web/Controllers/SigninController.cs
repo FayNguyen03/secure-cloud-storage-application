@@ -25,8 +25,8 @@ public class SigninController : Controller
 
         if (user == null)
         {
-            ModelState.AddModelError("", "Invalid email or password");
-            return View(model);
+            ViewBag.error = "Invalid email or password";
+            return View();
         }
 
         // Check password
@@ -34,11 +34,13 @@ public class SigninController : Controller
 
         if (!isPasswordValid)
         {
-            ModelState.AddModelError("", "Invalid email or password");
+            ViewBag.error = "Invalid email or password";
             return View(model);
         }
 
-        HttpContext.Session.SetInt32("UserID", user.Id);
+        HttpContext.Session.SetString("User", user.FirstName);
+        HttpContext.Session.SetString("Email", user.Email);
+        HttpContext.Session.SetInt32("Id", user.Id);
 
         return RedirectToAction("Index", "Home");
     }
