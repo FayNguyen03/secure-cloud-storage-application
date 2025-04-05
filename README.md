@@ -1,18 +1,18 @@
-# secure-cloud-storage-application
+# Secure Cloud Storage 
 
-## Features Implemented
+## Features:
 
-Features to Implement
-File Encryption/Decryption
+[X] Users can upload and download (if they gain access) files securely
 
-User Group Management
+[X] Uploaded files are encrypted using ...
 
-Public-Key Certificate-Based Key Sharing
+[] User Group Management
 
-Integration with Cloud Storage APIs (Dropbox, Google Drive, Box, Office365)
+[X] Public-Key Certificate-Based Key Sharing
 
-Add/Remove Users Securely
+[ ] Integration with Cloud Storage APIs (Dropbox, Google Drive, Box, Office365)
 
+[ ] Add Users Securely
 
 
 ## Project Structure (Pending)
@@ -22,8 +22,10 @@ SecureCloudStorage.sln
 │
 ├── SecureCloudStorage.Web/              # MVC Web App
 │   ├── Controllers/
-|   |   ├── HomeController.cs
-|   |   └── FileController.cs
+|   |   ├── RegisterController.cs   #Register new user and add the new user to the database
+|   |   ├── SigninController.cs     #Sign in to an existing user
+|   |   ├── HomeController.cs       #Control the home page
+|   |   └── FileController.cs       #Manage file-processing tasks (uploading, downloading, encrypting, decrypting)
 │   ├── Models/
 |   |   ├── ErrorViewModel.cs
 |   |   ├── AdminViewModel.cs
@@ -34,52 +36,57 @@ SecureCloudStorage.sln
 |   |   |   ├── Upload.cshtml
 |   |   |   └── 
 │   │   └── Shared/
-│   ├── wwwroot/                         # JS, CSS, Bootstrap, Uploaded files
-|   |   └── uploads/
+│   ├── wwwroot/                        
 │   ├── appsettings.json
 │   └── Program.cs
 │
-├── SecureCloudStorage.Application/     # Business logic (services, DTOs) 
-|   ├── IEncryptionService.cs
-|   ├── CertificateGenerationService.cs
-│   └── EncryptionService.cs
-├── SecureCloudStorage.Infrastructure/   # Cloud SDKs, crypto, certs
-├── SecureCloudStorage.Domain/           # Core entities (FileMetadata, UserCert)
+├── SecureCloudStorage.Application/     
+|   ├── IEncryptionService.cs       # Interface for the Encryption Service
+|   ├── CertificateGenerationService.cs # Interface for the Encryption Service
+│   └── EncryptionService.cs           #Encryption and decryption uploaded and downloaded files
+├── SecureCloudStorage.Infrastructure/   # Secured Storage
+├── SecureCloudStorage.Domain/           
+|   ├── Entities/  #Binding with the MySQL Database
+|   |   ├── User.cs     #Binding with the User table (storing users' information)
+|   |   ├── Encrypted.cs #Binding with the User table (storing users' information)
 │   ├── FileMetadata.cs
 │   └── UserCertificate.cs
-├── SecureCloudStorage.Tests/            # Unit tests
-└── SecureCloudStorage.Shared/           # Common helpers, extensions
+└── SecureCloudStorage.Shared/           
 
 ```
 
 ## Cryptographic Design
+
 1. Hybrid Encryption Approach
 
-- Symmetric encryption (e.g., AES-256) for encrypting files (fast and secure).
+[ ] Symmetric encryption (e.g., AES-256) for encrypting files (fast and secure).
 
-Asymmetric encryption (e.g., RSA or ECC) for encrypting the AES key per user using their public certificate.
+[ ] Asymmetric encryption (e.g., RSA or ECC) for encrypting the AES key per user using their public certificate.
 
 2. Key Management System
-Each user has:
 
-A public/private key pair (e.g., using RSA)
+Each registered user has:
 
-A digital certificate (self-signed or CA-issued)
+[ ] A public/private key pair (e.g., using RSA)
 
-File encrypted with a random AES key → AES key encrypted with each group member’s public key
+[ ] A self-signed digital certificate
 
-Store metadata alongside encrypted file: e.g., encrypted AES keys for each group member
+[ ] File encrypted with a random AES key 
+
+AES key encrypted with each group member’s public key
+
+[ ] Store metadata alongside encrypted file (encrypted AES keys for each group member, initialization vector)
 
 ## System Architecture
-📂 Client App (C# Desktop App – WPF/.NET)
 
-Login System (optional for local credentials)
+
+[X] Login System 
 
 Group Management UI: Add/remove users and import/export public certificates
 
-File Manager:
+[ ] File Manager:
 
-Select files
+    [ ] Select files
 
 Encrypt/upload to cloud
 
@@ -105,22 +112,6 @@ Box: Box.V2
 
 Unlike wwwroot, files in Infrastructure/Storage/ are not accessible via HTTP — good! That’s exactly what we want for certs and sensitive encrypted files.
 
-
-✅ Summary
-Action	Where	Why
-Store certs, files	Infrastructure/Storage/	Secure, not publicly served
-Use File.WriteAllBytes(...)	✅	No web server exposure
-Optionally wrap in a service	✅	Cleaner and testable code
-Avoid wwwroot	❌	Only for public static content
-Let me know if you'd like help:
-
-Writing a DownloadDecryptedFile() action
-
-Handling group access logic in the DB
-
-Creating the full IFileStorageService interface and DI integration
-
-You're setting up a clean and secure architecture — love it 🔐🔥
 
 
 
