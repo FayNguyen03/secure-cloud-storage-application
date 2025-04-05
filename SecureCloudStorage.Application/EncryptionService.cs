@@ -35,8 +35,10 @@ public class EncryptionService: IEncryptionService{
 
     public byte[] DecryptAESKey(byte[] encryptedKey, byte[] privateKey)
     {
-        using var rsa = RSA.Create();
-        rsa.ImportPkcs8PrivateKey(privateKey, out _);
+        var cert = new X509Certificate2(privateKey, "secure-password", X509KeyStorageFlags.Exportable
+        );
+
+        using var rsa = cert.GetRSAPrivateKey();
         return rsa.Decrypt(encryptedKey, RSAEncryptionPadding.OaepSHA256);
     }
 

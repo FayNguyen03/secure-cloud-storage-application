@@ -18,7 +18,6 @@ namespace SecureCloudStorage.Web.Controllers{
 
         [HttpGet]
         public IActionResult Register() => View();
-
         [HttpPost]
         public IActionResult Register(RegisterViewModel model){
 

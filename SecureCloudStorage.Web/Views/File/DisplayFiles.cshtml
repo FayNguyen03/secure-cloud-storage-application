@@ -20,7 +20,7 @@
                         </p>
                         @if (file.Downloadable)
                         {
-                            <a asp-action="Download" asp-route-id="@file.FileId" class="btn btn-primary">Download</a>
+                            <a asp-controller="File" asp-action="Download" asp-route-id=@file.FileId class="btn btn-primary">Download</a>
                         }
                         else
                         {
@@ -53,11 +53,11 @@ else
                     <td>
                         @if (file.Downloadable)
                         {
-                            <a asp-action="Download" asp-route-id="@file.FileId" class="btn btn-sm btn-success">Download</a>
+                            <a asp-controller="File" asp-action="Download" asp-route-id="@file.FileId" class="btn btn-primary">Download</a>
                         }
                         else
                         {
-                            <span class="text-danger">Access Denied</span>
+                            <span class="text-danger">No permission to decrypt and download</span>
                         }
                     </td>
                 </tr>

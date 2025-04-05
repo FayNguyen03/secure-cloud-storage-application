@@ -105,52 +105,6 @@ Box: Box.V2
 
 Unlike wwwroot, files in Infrastructure/Storage/ are not accessible via HTTP — good! That’s exactly what we want for certs and sensitive encrypted files.
 
-✨ Optional: Wrap It in a Service
-Create a simple IFileStorageService interface and class:
-
-public interface IFileStorageService
-{
-    string SavePublicCert(string email, byte[] certBytes);
-    string SavePrivateKey(string email, byte[] pfxBytes);
-    string SaveEncryptedFile(string fileName, byte[] data);
-}
-public class FileStorageService : IFileStorageService
-{
-    private readonly string _basePath;
-
-    public FileStorageService()
-    {
-        _basePath = Path.Combine(Directory.GetCurrentDirectory(), "SecureCloudStorage.Infrastructure", "Storage");
-    }
-
-    public string SavePublicCert(string email, byte[] certBytes)
-    {
-        var path = Path.Combine(_basePath, "Certs", $"{email}.cer");
-        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        File.WriteAllBytes(path, certBytes);
-        return path;
-    }
-
-    public string SavePrivateKey(string email, byte[] pfxBytes)
-    {
-        var path = Path.Combine(_basePath, "CertsPrivate", $"{email}.pfx");
-        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        File.WriteAllBytes(path, pfxBytes);
-        return path;
-    }
-
-    public string SaveEncryptedFile(string fileName, byte[] data)
-    {
-        var path = Path.Combine(_basePath, "Files", fileName);
-        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        File.WriteAllBytes(path, data);
-        return path;
-    }
-}
-Then register this in Program.cs:
-
-builder.Services.AddScoped<IFileStorageService, FileStorageService>();
-And inject it wherever needed.
 
 ✅ Summary
 Action	Where	Why
