@@ -18,6 +18,14 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpPost]
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Remove("User");
+        HttpContext.Session.Remove("Email");
+        HttpContext.Session.Remove("Id");
+        return RedirectToAction("Index", "Home");
+    }
     /*
     [HttpGet]
     public IActionResult Upload()

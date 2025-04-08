@@ -1,7 +1,4 @@
-﻿@{
-    var user = Context.Session.GetString("User");
-    Console.WriteLine(user);
-}
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +29,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Instruction</a>
                         </li>
-                        @if (user != null)
+                        @if (Context.Session.GetString("Email") != null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="File" asp-action="Upload">Upload File</a>
@@ -40,6 +37,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="File" asp-action="DisplayFiles">File Uploaded Gallery</a>
                             </li>
+                                        
                         }
                         else{
                             <li class="nav-item">
@@ -51,11 +49,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                         }
                         
                     </ul>
-                    @if(user != null){
+                    @if(Context.Session.GetString("User") != null){
                     <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" >Welcome, @user</a>
+                                <a class="nav-link text-dark" >Welcome, @Context.Session.GetString("User")</a>
                             </li>
+                            <form method="post" asp-asp-controller="Home" asp-action="Logout" class="d-inline">            
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                            </form>    
                     </ul>
                     }
                 </div>

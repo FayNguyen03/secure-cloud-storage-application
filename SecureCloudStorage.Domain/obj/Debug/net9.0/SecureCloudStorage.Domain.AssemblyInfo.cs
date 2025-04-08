@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecureCloudStorage.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03815b3d9b6051c4a6966c696fe6d6b0fa20a1c7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2fbd7cd542b4da893d40827ea1b48e8ba98ba614")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecureCloudStorage.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecureCloudStorage.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

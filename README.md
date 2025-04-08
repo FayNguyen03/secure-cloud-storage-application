@@ -2,17 +2,17 @@
 
 ## Features:
 
-[X] Users can upload and download (if they gain access) files securely
+- [X] Users can upload and download (if they gain access) files securely
 
-[X] Uploaded files are encrypted using ...
+- [X] Uploaded files are encrypted using ...
 
-[] User Group Management
+- [] User Group Management
 
-[X] Public-Key Certificate-Based Key Sharing
+- [X] Public-Key Certificate-Based Key Sharing
 
-[ ] Integration with Cloud Storage APIs (Dropbox, Google Drive, Box, Office365)
+- [ ] Integration with Cloud Storage APIs (Dropbox, Google Drive, Box, Office365)
 
-[ ] Add Users Securely
+- [ ] Add Users Securely
 
 
 ## Project Structure (Pending)
@@ -59,34 +59,34 @@ SecureCloudStorage.sln
 
 1. Hybrid Encryption Approach
 
-[ ] Symmetric encryption (e.g., AES-256) for encrypting files (fast and secure).
+- [ ] Symmetric encryption (e.g., AES-256) for encrypting files (fast and secure).
 
-[ ] Asymmetric encryption (e.g., RSA or ECC) for encrypting the AES key per user using their public certificate.
+- [ ] Asymmetric encryption (e.g., RSA or ECC) for encrypting the AES key per user using their public certificate.
 
 2. Key Management System
 
 Each registered user has:
 
-[ ] A public/private key pair (e.g., using RSA)
+- [ ] A public/private key pair (e.g., using RSA)
 
-[ ] A self-signed digital certificate
+- [ ] A self-signed digital certificate
 
-[ ] File encrypted with a random AES key 
+- [ ] File encrypted with a random AES key 
 
 AES key encrypted with each group member’s public key
 
-[ ] Store metadata alongside encrypted file (encrypted AES keys for each group member, initialization vector)
+- [ ] Store metadata alongside encrypted file (encrypted AES keys for each group member, initialization vector)
 
 ## System Architecture
 
 
-[X] Login System 
+- [X] Login System 
 
 Group Management UI: Add/remove users and import/export public certificates
 
-[ ] File Manager:
+- [ ] File Manager:
 
-    [ ] Select files
+    - [ ] Select files
 
 Encrypt/upload to cloud
 
