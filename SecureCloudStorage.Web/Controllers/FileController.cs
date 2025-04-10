@@ -23,7 +23,21 @@ public class FileController : Controller
     //GET /Files/Upload
     //return the upload form to the user
     [HttpGet]
-    public IActionResult Upload() => View();
+    public IActionResult Upload(){
+        //retrieve the current groups in the database
+        var groups = _context.Groups.ToList();
+
+        var model = new EncryptedFileViewModel
+        {
+            AvailableGroups = groups
+        };
+
+        return View(model);
+    } 
+
+    public void SelectGroup(int id, List<int> SelectedGroup){
+        SelectedGroup.Add(id);
+    }
 
     //POST /Files/Upload
     //handle the file submission when the user submits the upload form
@@ -36,7 +50,7 @@ public class FileController : Controller
         var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
 
         //check whether a file is submitted and a recipient email is inputted
-        if (model.Files.Count == 0 || model.RecipientEmails.Length == 0)
+        if (model.Files.Count == 0 || (model.RecipientEmails.Length == 0 && model.SelectedGroupIds.Count == 0))
             return View(model);
 
         var emails = model.RecipientEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList();
@@ -97,7 +111,6 @@ public class FileController : Controller
         
         return RedirectToAction("UploadSuccessfully");
     }
-
     public IActionResult DisplayFiles(){
         var userEmail = HttpContext.Session.GetString("Email");
         var files = _context.EncryptedFiles.Include(f => f.Uploader).
@@ -113,7 +126,6 @@ public class FileController : Controller
         return View(files);
     }
     public IActionResult UploadSuccessfully() => View();
-
     public IActionResult Download(int id)
 {
     var userEmail = HttpContext.Session.GetString("Email");

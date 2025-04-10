@@ -9,6 +9,8 @@ public class GroupFileAccess
 {
     [Column("group_id")]
     public int GroupId { get; set; }
+    public Group Group { get; set; }
     [Column("file_id")]    
-    public string FileId { get; set; }
+    public int FileId { get; set; }
+    public EncryptedFile File{get; set;}
 }

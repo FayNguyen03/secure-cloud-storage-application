@@ -19,4 +19,5 @@ public class EncryptedFile
     
     public User Uploader { get; set; }
     public ICollection<UserFileAccess> AccessList { get; set; }
+    public ICollection<GroupFileAccess> GroupAccessList { get; set; }
 }

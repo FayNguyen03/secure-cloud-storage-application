@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Add A New Group";
+}
+@model AddGroupViewModel
+<h2>Add A New Group <i class="fa-solid fa-user-group"></i></h2>
+<form asp-controller="Group" asp-action="AddGroup" method="post" enctype="multipart/form-data">
+    <label style="">Group Name <br/><input type="text" style="margin-left: 5px; width=10px;" name="GroupName" required/></label>
+    <br/><br/>
+    <label>Enter emails of the member Group (comma/new line/semi-colon separated emails):</label>
+    <br/><br/>
+    <input type="text" name="MemberEmails" rows="5" required />
+    <br/><br/>
+    <label>Enter emails of admins (comma/new line/semi-colon separated emails):</label>
+    <br/><br/>
+    <input type="text" name="AdminEmails" rows="5" />
+    <br/><br/>
+    <button class="btn btn-info btn-info" type="submit">Upload & Encrypt</button>
+</form>
+
+@if (ViewBag.error != null){
+    <div class="alert alert-warning">@ViewBag.error</div>
+}

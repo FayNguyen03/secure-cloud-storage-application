@@ -9,5 +9,6 @@ public class Group
     public int Id { get; set; }
     [Column("group_name")]    
     public string Name { get; set; }
-    public ICollection<User> Members { get; set; }
+    public ICollection<GroupMember> GroupMembers { get; set; }
+    public ICollection<GroupFileAccess> GroupAccessList { get; set; }
 }

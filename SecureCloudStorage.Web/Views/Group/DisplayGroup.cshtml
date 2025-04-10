@@ -1,0 +1,31 @@
+@model List<DisplayGroupViewModel>
+
+@{
+    ViewData["Title"] = "All Groups";
+}
+
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Group Name</th>
+                <th>Members</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in Model)
+            {
+                <tr>
+                    <td>@group.GroupName</td>
+                    <td>@group.MemberEmails</td>
+                    @if (group.Admin == true){
+                    <td>
+                    <!-- If they are an admin of the Group they can modify the group-->
+                    <!--   <a asp-controller="Group" asp-action="EditGroup" asp-route-id="@group.Id" class="btn btn-primary">Edit</a>-->
+                    <!--     <a asp-controller="Group" asp-action="DeleteGroup" asp-route-id="@group.Id" class="btn btn-danger">Delete</a>-->
+                    </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>

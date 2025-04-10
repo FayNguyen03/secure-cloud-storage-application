@@ -19,4 +19,6 @@ public class User
     [Column("password_acc")]
     public string Password {get; set;}
     public ICollection<UserFileAccess> FileAccesses { get; set; }
+    public ICollection<GroupMember> GroupMembers { get; set; }
+
 }

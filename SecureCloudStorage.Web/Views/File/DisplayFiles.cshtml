@@ -2,39 +2,9 @@
 
 @{
     ViewData["Title"] = "All Uploaded Files";
-    var viewMode = Context.Request.Query["view"] == "grid" ? "grid" : "list";
 }
 
-@if (viewMode == "grid")
-{
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var file in Model)
-        {
-            <div class="col">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">@file.FileName</h5>
-                        <p class="card-text">
-                            Uploaded by <strong>@file.UploaderName</strong><br />
-                            @file.UploadedAt.ToString("g")
-                        </p>
-                        @if (file.Downloadable)
-                        {
-                            <a asp-controller="File" asp-action="Download" asp-route-id=@file.FileId class="btn btn-primary">Download</a>
-                        }
-                        else
-                        {
-                            <div class="alert alert-warning p-2">No permission to decrypt</div>
-                        }
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-}
-else
-{
-    <table class="table table-bordered">
+<table class="table table-bordered">
         <thead>
             <tr>
                 <th>File Name</th>
@@ -64,4 +34,3 @@ else
             }
         </tbody>
     </table>
-}
