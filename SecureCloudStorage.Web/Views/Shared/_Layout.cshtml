@@ -60,8 +60,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                             <li class="nav-item">
                                 <a class="nav-link text-dark" >Welcome, @Context.Session.GetString("User")</a>
                             </li>
-                            <form method="post" asp-asp-controller="Home" asp-action="Logout" class="d-inline">            
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                            <form method="post" asp-controller="Home" asp-action="LogOut" class="d-inline">            
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Log Out</button>
                             </form>    
                     </ul>
                     }

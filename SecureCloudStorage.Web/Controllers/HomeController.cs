@@ -19,12 +19,13 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Logout()
+    public IActionResult LogOut()
     {
         HttpContext.Session.Remove("User");
         HttpContext.Session.Remove("Email");
         HttpContext.Session.Remove("Id");
         return RedirectToAction("Index", "Home");
+
     }
     /*
     [HttpGet]
