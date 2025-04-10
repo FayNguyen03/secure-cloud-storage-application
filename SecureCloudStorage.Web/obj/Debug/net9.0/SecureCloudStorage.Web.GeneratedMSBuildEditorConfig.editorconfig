@@ -44,8 +44,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3JvdXAvQWRkR3JvdXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Group/DeleteGroup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3JvdXAvRGVsZXRlR3JvdXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Group/DisplayGroup.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3JvdXAvRGlzcGxheUdyb3VwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Group/EditGroup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvR3JvdXAvRWRpdEdyb3VwLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/faynguyen03/Documents/TCD/NETWORK/secure-cloud-storage-application/SecureCloudStorage.Web/Views/Home/Index.cshtml]

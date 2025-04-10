@@ -27,7 +27,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Instruction</a>
                         </li>
                         @if (Context.Session.GetString("Email") != null)
                         {
@@ -43,6 +42,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Group" asp-action="DisplayGroup">Display Groups</a>
                             </li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Private Tab!!!</a>
+
                                         
                         }
                         else{

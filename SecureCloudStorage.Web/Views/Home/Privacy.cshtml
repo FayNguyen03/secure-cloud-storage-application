@@ -1,6 +1,44 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Self Destruct";
 }
+
+<style>
+    .center-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+    }
+
+    .center-image img {
+        max-height: 500px;
+        width: auto;
+    }
+    .destruct {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 50vh;
+    }
+
+    
+</style>
+
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Use this page to destroy everything -- What Dr. Doofenshmirtz always does with his invention!!! No one can stop you!</canvas></p>
+
+<div class="destruct">
+<form  asp-controller="Home" asp-action="WipeEverything" method="post" onsubmit="return confirm('Are you SURE you want to DELETE EVERYTHING?');">
+    <button type="submit" class="btn btn-danger">
+        Self-Destruct
+    </button>
+</form>
+</div>
+
+<div class="center-image">
+    <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Heinz_Doofenshmirtz.png"/>
+    
+</div>
+

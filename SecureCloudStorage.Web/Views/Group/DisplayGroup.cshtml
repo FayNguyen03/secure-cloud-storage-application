@@ -21,8 +21,8 @@
                     @if (group.Admin == true){
                     <td>
                     <!-- If they are an admin of the Group they can modify the group-->
-                    <!--   <a asp-controller="Group" asp-action="EditGroup" asp-route-id="@group.Id" class="btn btn-primary">Edit</a>-->
-                    <!--     <a asp-controller="Group" asp-action="DeleteGroup" asp-route-id="@group.Id" class="btn btn-danger">Delete</a>-->
+                    <a asp-controller="Group" asp-action="EditGroup" asp-route-id="@group.Id" class="btn btn-primary">Edit</a>
+                    <a asp-controller="Group" asp-action="DeleteGroup" asp-route-id="@group.Id" class="btn btn-danger">Delete</a>
                     </td>
                     }
                 </tr>

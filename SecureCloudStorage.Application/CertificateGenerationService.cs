@@ -17,7 +17,7 @@ public class CertificateGenerationService {
         var cert = request.CreateSelfSigned(DateTimeOffset.Now, DateTimeOffset.Now.AddMonths(1));
         //Public certificate: DER-encoded file that contains public key + metadata
         var publicBytes = cert.Export(X509ContentType.Cert);//.cer
-        var privateBytes = cert.Export(X509ContentType.Pkcs12, "secure-password");//.pfx password-protected for security
+        var privateBytes = cert.Export(X509ContentType.Pkcs12, "Stolaf");//.pfx password-protected for security
         return new UserCertificate{
             FullName = firstName + lastName,
             Email = email,

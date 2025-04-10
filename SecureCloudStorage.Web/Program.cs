@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         builder.Configuration.GetConnectionString("MySQLConnection"),
         new MySqlServerVersion(new Version(9, 2, 0)) 
     ));
+builder.Services.AddSingleton<AESKeyService>();
 builder.Services.AddScoped<IEncryptionService, EncryptionService>();
 builder.Services.AddScoped<CertificateGenerationService>();
 builder.Services.AddSession();
@@ -43,3 +44,4 @@ app.MapControllerRoute(
 
 app.UseSession(); 
 app.Run();
+

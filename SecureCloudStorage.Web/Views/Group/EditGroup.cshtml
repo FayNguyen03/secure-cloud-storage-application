@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Edit The Group";
+    var editName = ViewBag.EditName as bool? ?? false;
+    var editEmails = ViewBag.EditEmails as bool? ?? false;
+    var editAdmin = ViewBag.EditAdmins as bool? ?? false;
+}
+@model EditGroupViewModel
+<h2>Edit The Group <i class="fa-solid fa-user-group"></i></h2>
+<form asp-controller="Group" asp-action="EditGroup" method="post" enctype="multipart/form-data">
+    <label style="">Group Name <br/></label>
+    @if (!editName){
+        <p style="font-size: 20px;">@Model.GroupName        </p>
+        <a asp-action="EditGroup" asp-route-id="@Model.GroupId" asp-route-editName="true">Edit</a>
+    }
+    else{
+        <input type="text" style="margin-left: 5px; width=10px;" name="NewGroupName" required/>
+    }
+    <br/><br/>
+    <label>Enter emails of the member Group (comma/new line/semi-colon separated emails):</label>
+    <br/><br/>
+    @if (!editEmails){
+        <p style="font-size: 10px;">@Model.MemberEmails        </p>
+        <a asp-route-editEmails="true">Edit</a>
+    }
+    else{
+        <input type="text" name="NewMemberEmails" rows="5" />
+    }
+    <br/><br/>
+    <label>Enter emails of admins (comma/new line/semi-colon separated emails):</label>
+    <br/><br/>
+    @if (!editAdmin){
+        <p style="font-size: 10px;">@Model.AdminEmails        </p>
+        <a asp-route-editAdmins="true">Edit</a>
+    }
+    else{
+        <input type="text" name="NewAdminEmails" rows="5" />
+    }
+    <br/><br/>
+    <button class="btn btn-info btn-info" type="submit">Edit Group</button>
+</form>
+<br/><br/>
+@if (ViewBag.error != null){
+    <div class="alert alert-warning">@ViewBag.error</div>
+}

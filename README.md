@@ -115,4 +115,4 @@ Unlike wwwroot, files in Infrastructure/Storage/ are not accessible via HTTP —
 
 
 
-
+Check password that generates .pfx: `openssl pkcs12 -in yourfile.pfx -info -nokeys`

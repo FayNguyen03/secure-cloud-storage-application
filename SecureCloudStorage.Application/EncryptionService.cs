@@ -1,11 +1,22 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using SecureCloudStorage.Domain;
 using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 namespace SecureCloudStorage.Application;
 
+
 public class EncryptionService: IEncryptionService{
-    public (byte[] EncryptedFile, FileMetadata Metadata) EncryptFile(byte[] fileData, List<User> recipients){
+    private readonly AESKeyService _aes_service;
+    
+    private readonly  IConfiguration configuration;
+    private readonly string _secure_password ="Stolaf";
+    
+    public EncryptionService(AESKeyService aes_service){
+        _aes_service = aes_service;
+    }
+    public (byte[] EncryptedFile, FileMetadata Metadata) EncryptFile(string fileName, byte[] fileData, List<User> recipients){
         using var aes = Aes.Create();
         
         aes.GenerateIV();
@@ -26,17 +37,22 @@ public class EncryptionService: IEncryptionService{
             encryptedKeys[user.Email] = encryptedKey;
         }
 
+        var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
+        var aesKeyPath =  Path.Combine(storageBase, "aeskeys", $"{fileName}.enc");
+        
+        SaveEncryptedAESKey(aes.Key, aesKeyPath, _aes_service.GetMasterKey());
+
         return (ms.ToArray(), new FileMetadata{
             FileName = "encryptedFile.dat",
             InitializationVector = aes.IV,
-            EncryptedKeys = encryptedKeys
+            EncryptedKeys = encryptedKeys,
+            AesKeyPath = aesKeyPath       
         });
     }
 
     public byte[] DecryptAESKey(byte[] encryptedKey, byte[] privateKey)
     {
-        var cert = new X509Certificate2(privateKey, "secure-password", X509KeyStorageFlags.Exportable
-        );
+        var cert = new X509Certificate2(privateKey, _secure_password, X509KeyStorageFlags.Exportable);
 
         using var rsa = cert.GetRSAPrivateKey();
         return rsa.Decrypt(encryptedKey, RSAEncryptionPadding.OaepSHA256);
@@ -53,4 +69,34 @@ public class EncryptionService: IEncryptionService{
         cs.CopyTo(output);
         return output.ToArray();
     }
+
+    public void SaveEncryptedAESKey(byte[] aesKey, string aesKeyFilePath, byte[] masterKey)
+    {
+        using var aes = Aes.Create();
+        aes.Key = masterKey;
+        aes.IV = new byte[16]; 
+
+        using var encryptor = aes.CreateEncryptor();
+        var encryptedKey = encryptor.TransformFinalBlock(aesKey, 0, aesKey.Length);
+
+        Directory.CreateDirectory(Path.GetDirectoryName(aesKeyFilePath)!);
+        using var fs = new FileStream(aesKeyFilePath, FileMode.Create, FileAccess.Write);
+        fs.Write(aes.IV, 0, aes.IV.Length);
+        fs.Write(encryptedKey, 0, encryptedKey.Length);
+    }
+
+    public byte[] LoadDecryptedAESKey(string aesKeyFilePath, byte[] masterKey)
+    {
+        var allBytes = System.IO.File.ReadAllBytes(aesKeyFilePath);
+        var iv = allBytes.Take(16).ToArray();
+        var encryptedKey = allBytes.Skip(16).ToArray();
+
+        using var aes = Aes.Create();
+        aes.Key = masterKey;
+        aes.IV = iv;
+
+        using var decryptor = aes.CreateDecryptor();
+        return decryptor.TransformFinalBlock(encryptedKey, 0, encryptedKey.Length);
+    }
+
 }

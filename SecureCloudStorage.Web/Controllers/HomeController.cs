@@ -5,14 +5,54 @@ using SecureCloudStorage.Web.Controllers;
 using SecureCloudStorage.Application;
 using SecureCloudStorage.Domain;
 using SecureCloudStorage.Web.Models;
+using SecureCloudStorage.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 public class HomeController : Controller
 {
+    private readonly AppDbContext _context;
+
+    public HomeController(AppDbContext context){
+        _context = context;
+    }
+
     public IActionResult Index()
     {
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> WipeEverything()
+    {
+        // 1. Delete files from disk
+        var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
+
+        var dirs = new[] { "uploads", "metadata", "aeskeys", "certs-private", "certs"};
+        foreach (var dir in dirs)
+        {
+            var fullPath = Path.Combine(storageBase, dir);
+            if (Directory.Exists(fullPath))
+            {
+                Directory.Delete(fullPath, true); 
+            }
+        }
+
+        _context.UserFileAccesses.RemoveRange(_context.UserFileAccesses);
+        _context.GroupFileAccesses.RemoveRange(_context.GroupFileAccesses);
+        _context.GroupMembers.RemoveRange(_context.GroupMembers);
+        _context.EncryptedFiles.RemoveRange(_context.EncryptedFiles);
+        _context.Groups.RemoveRange(_context.Groups);
+        _context.Users.RemoveRange(_context.Users);
+        await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `User` AUTO_INCREMENT = 1;");
+        await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `GroupMember` AUTO_INCREMENT = 1;");
+        await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `EncryptedFile` AUTO_INCREMENT = 1;");
+
+        await _context.SaveChangesAsync();
+
+        TempData["Message"] = "☢️ Everything has been wiped!";
+        
+        return RedirectToAction("LogOut", "Home");
+    }
     public IActionResult Privacy()
     {
         return View();
