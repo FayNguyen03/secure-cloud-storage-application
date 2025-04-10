@@ -43,22 +43,17 @@ public class HomeController : Controller
         _context.EncryptedFiles.RemoveRange(_context.EncryptedFiles);
         _context.Groups.RemoveRange(_context.Groups);
         _context.Users.RemoveRange(_context.Users);
+        await _context.SaveChangesAsync();
+        //clear everything before reset
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `User` AUTO_INCREMENT = 1;");
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `GroupMember` AUTO_INCREMENT = 1;");
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `EncryptedFile` AUTO_INCREMENT = 1;");
 
-        await _context.SaveChangesAsync();
-
         TempData["Message"] = "☢️ Everything has been wiped!";
         
-        return RedirectToAction("LogOut", "Home");
+        return RedirectToAction(actionName:"LogOut", controllerName:"Home");
     }
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [HttpPost]
+     [HttpPost]
     public IActionResult LogOut()
     {
         HttpContext.Session.Remove("User");
@@ -67,6 +62,12 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Home");
 
     }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+   
     /*
     [HttpGet]
     public IActionResult Upload()
