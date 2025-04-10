@@ -6,7 +6,6 @@ using SecureCloudStorage.Domain;
 using SecureCloudStorage.Web.Models;
 using SecureCloudStorage.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 
 
 namespace SecureCloudStorage.Web.Controllers{
@@ -35,10 +34,6 @@ public class FileController : Controller
         return View(model);
     } 
 
-    public void SelectGroup(int id, List<int> SelectedGroup){
-        SelectedGroup.Add(id);
-    }
-
     //POST /Files/Upload
     //handle the file submission when the user submits the upload form
     [HttpPost]
@@ -48,16 +43,22 @@ public class FileController : Controller
             .Where(u => u.Email == HttpContext.Session.GetString("Email")).ToList();
 
         var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
-
         //check whether a file is submitted and a recipient email is inputted
-        if (model.Files.Count == 0 || (model.RecipientEmails.Length == 0 && model.SelectedGroupIds.Count == 0))
-            return View(model);
-
-        var emails = model.RecipientEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList();
+        if (model.SelectedGroupIds == null && (!!string.IsNullOrWhiteSpace(model.RecipientEmails) && model.SelectedGroupIds.Count == 0)) return View(model);
+        var emails = new List<string>();
+        if (!string.IsNullOrWhiteSpace(model.RecipientEmails))
+            emails = emails.Concat(model.RecipientEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList()).ToList();
+        var groupMembers = new List<User>();
         //return error if the emails are not in the database
+        //add the user of the group into the emails
+        foreach (var group in model.SelectedGroupIds){
+            groupMembers = groupMembers.Concat(_context.GroupMembers
+            .Where(u => u.GroupId == group).Select(u => u.User).ToList()).ToList();
+        }
         var recipients = _context.Users
             .Where(u => emails.Contains(u.Email))
             .ToList();
+        recipients = recipients.Concat(groupMembers).ToList();
         var foundEmails = recipients.Select(r => r.Email).ToHashSet();
         var missingEmails = emails.Where(e => !foundEmails.Contains(e)).ToList();
         recipients = recipients.Concat(uploader).
@@ -66,49 +67,59 @@ public class FileController : Controller
                                 ToList();
         if (missingEmails.Any())
         {
-            ViewBag.MissingRecipients = string.Join(", ", missingEmails);
+            ViewBag.MissingRecipients = "Invalid Emails: " + string.Join(", ", missingEmails);
         }
-        foreach (var file in model.Files){
 
-            var filePath = Path.Combine(storageBase, "uploads", $"{file.FileName}.enc");
-            
-            var metadataPath = Path.Combine(storageBase, "metadata", $"{file.FileName}.meta.json");
-            //read file into bytes
-            using var ms = new MemoryStream();
-            await file.CopyToAsync(ms);
-            var fileBytes = ms.ToArray();
-            
-            var (encryptedFile, metadata) = _encryptionService.EncryptFile(fileBytes, recipients);
-            Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
-            //encrypt the file and write it into .enc file
-            System.IO.File.WriteAllBytes(filePath, encryptedFile);
-
-            Directory.CreateDirectory(Path.GetDirectoryName(metadataPath)!);
-            //write metadata (IV + per-user keys) as .meta.json
-            System.IO.File.WriteAllText(metadataPath, JsonSerializer.Serialize(metadata));
-            var encryptedFileEntry = new EncryptedFile
-            {
-                FileName = file.FileName,
-                EncryptedPath = filePath,
-                MetadataPath = metadataPath,
-                UploadedAt = DateTime.UtcNow,
-                UploaderId = (int)uploader[0].Id
-            };
-            _context.EncryptedFiles.Add(encryptedFileEntry);
-            await _context.SaveChangesAsync();
-            foreach (var recipient in recipients)
-            {
-                _context.UserFileAccesses.Add(new UserFileAccess
-                    {
-                        UserId = recipient.Id,
-                        FileId = encryptedFileEntry.Id,
-                        EncryptedAesKey = metadata.EncryptedKeys[recipient.Email]
-                    });
-        }
-            await _context.SaveChangesAsync();
-            }
-        //show the upload successfully page
+        var file = model.File;
+        var filePath = Path.Combine(storageBase, "uploads", $"{file.FileName}.enc");
         
+        var metadataPath = Path.Combine(storageBase, "metadata", $"{file.FileName}.meta.json");
+        //read file into bytes
+        using var ms = new MemoryStream();
+        await file.CopyToAsync(ms);
+        var fileBytes = ms.ToArray();
+        
+        var (encryptedFile, metadata) = _encryptionService.EncryptFile(fileBytes, recipients);
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
+        //encrypt the file and write it into .enc file
+        System.IO.File.WriteAllBytes(filePath, encryptedFile);
+
+        Directory.CreateDirectory(Path.GetDirectoryName(metadataPath)!);
+        //write metadata (IV + per-user keys) as .meta.json
+        System.IO.File.WriteAllText(metadataPath, JsonSerializer.Serialize(metadata));
+        var encryptedFileEntry = new EncryptedFile
+        {
+            FileName = file.FileName,
+            EncryptedPath = filePath,
+            MetadataPath = metadataPath,
+            UploadedAt = DateTime.UtcNow,
+            UploaderId = (int)uploader[0].Id
+        };
+        _context.EncryptedFiles.Add(encryptedFileEntry);
+        await _context.SaveChangesAsync();
+
+        foreach (var groupId in model.SelectedGroupIds ?? new List<int>())
+        {
+            _context.GroupFileAccesses.Add(new GroupFileAccess
+            {
+                GroupId = groupId,
+                FileId = encryptedFileEntry.Id,
+            });
+        }
+        await _context.SaveChangesAsync();
+
+        foreach (var recipient in recipients)
+        {
+            _context.UserFileAccesses.Add(new UserFileAccess
+                {
+                    UserId = recipient.Id,
+                    FileId = encryptedFileEntry.Id,
+                    EncryptedAesKey = metadata.EncryptedKeys[recipient.Email]
+                });
+        }
+        await _context.SaveChangesAsync();
+        
+        //show the upload successfully page
         return RedirectToAction("UploadSuccessfully");
     }
     public IActionResult DisplayFiles(){
