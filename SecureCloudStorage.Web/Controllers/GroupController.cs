@@ -210,55 +210,57 @@ public class GroupController : Controller
         //if the member emails are changed
         var newEmails = new List<string>();
 
-        if (!string.IsNullOrWhiteSpace(model.NewMemberEmails))
-            newEmails = newEmails.Concat(
-                model.NewMemberEmails.Split(new[] { ',', ';', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(e => e.Trim())
-            ).ToList();
-
         //if the admin emails are changed
         var newAdminEmails = new List<string>();
-
-        if (!string.IsNullOrWhiteSpace(model.NewAdminEmails))
-            newAdminEmails = newAdminEmails.Concat(
-                model.NewAdminEmails.Split(new[] { ',', ';', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(e => e.Trim())
-            ).ToList();
-
-
-        //remove users
-        var removedUser = _context.GroupMembers.Where(u => u.GroupId == id && !newEmails.Contains(u.User.Email)).Select(u => u.UserId).ToList();
-        var fileAccessedGroup = _context.GroupFileAccesses.Where(u => u.GroupId == id).Select(u => u.FileId).ToList();
-        await _context.UserFileAccesses.Where(u => removedUser.Contains(u.UserId) && fileAccessedGroup.Contains(u.FileId)).ExecuteDeleteAsync();
-        await _context.GroupMembers.Where(u => removedUser.Contains(u.UserId) && u.GroupId == id).ExecuteDeleteAsync();
-        await _context.SaveChangesAsync();
-
-        //add on users
-        var newUsers = _context.Users.Where(u => newEmails.Contains(u.Email) && !currUsers.Contains(u.Id)).ToList();
-        newUsers = newUsers.Concat(new List<User>{curr}).ToList();
-        var foundEmails = newUsers.Select(u => u.Email).ToHashSet();
-        var missingEmails = newEmails.Where(e => !foundEmails.Contains(e)).ToList();
-        foreach(var user in newUsers){
-            foreach(var file in fileAccessedGroup){
-                _context.UserFileAccesses.Add(new UserFileAccess{
-                    FileId = file,
-                    UserId = user.Id
-                });
-            }    
-            _context.GroupMembers.Add( new GroupMember{
-                UserId = user.Id,
-                GroupId = id,
-                Admin = newAdminEmails.Contains(user.Email)
-            });
-       
-        }
-        await _context.SaveChangesAsync();
 
         //change the Group Name
         if (!string.IsNullOrWhiteSpace(model.NewGroupName) && model.NewGroupName.Length != 0)
         {  group.Name =  model.NewGroupName;
             await _context.SaveChangesAsync();
         }
+
+         if (!string.IsNullOrWhiteSpace(model.NewAdminEmails) && !string.IsNullOrEmpty(model.NewMemberEmails))
+            newAdminEmails = newAdminEmails.Concat(
+                model.NewAdminEmails.Split(new[] { ',', ';', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(e => e.Trim())
+            ).ToList();
+            newAdminEmails = newAdminEmails.Concat(new List<string>{curr.Email}).ToList();
+
+        if (!string.IsNullOrWhiteSpace(model.NewMemberEmails) && !string.IsNullOrEmpty(model.NewMemberEmails)){
+            newEmails = newEmails.Concat(
+                model.NewMemberEmails.Split(new[] { ',', ';', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(e => e.Trim())
+            ).ToList();
+            newEmails = newEmails.Concat(new List<string>{curr.Email}).ToList();
+            //remove users
+            var removedUser = _context.GroupMembers.Where(u => u.GroupId == id && !newEmails.Contains(u.User.Email)).Select(u => u.UserId).ToList();
+            var fileAccessedGroup = _context.GroupFileAccesses.Where(u => u.GroupId == id).Select(u => u.FileId).ToList();
+            await _context.UserFileAccesses.Where(u => removedUser.Contains(u.UserId) && fileAccessedGroup.Contains(u.FileId)).ExecuteDeleteAsync();
+            await _context.GroupMembers.Where(u => removedUser.Contains(u.UserId) && u.GroupId == id).ExecuteDeleteAsync();
+            await _context.SaveChangesAsync();
+
+            //add on users
+            var newUsers = _context.Users.Where(u => newEmails.Contains(u.Email) && !currUsers.Contains(u.Id)).ToList();
+            newUsers = newUsers.Concat(new List<User>{curr}).ToList();
+            var foundEmails = newUsers.Select(u => u.Email).ToHashSet();
+            var missingEmails = newEmails.Where(e => !foundEmails.Contains(e)).ToList();
+            foreach(var user in newUsers){
+                foreach(var file in fileAccessedGroup){
+                    _context.UserFileAccesses.Add(new UserFileAccess{
+                        FileId = file,
+                        UserId = user.Id
+                    });
+                }    
+                _context.GroupMembers.Add( new GroupMember{
+                    UserId = user.Id,
+                    GroupId = id,
+                    Admin = newAdminEmails.Contains(user.Email)
+                });
+        
+            }
+            await _context.SaveChangesAsync();
+        }
+        
 
         var curMembers = _context.GroupMembers.Include(m => m.User).Where(g => g.GroupId == id).ToList();
         foreach(var member in curMembers){

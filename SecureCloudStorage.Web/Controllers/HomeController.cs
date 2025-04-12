@@ -37,13 +37,13 @@ public class HomeController : Controller
             }
         }
 
-        _context.UserFileAccesses.RemoveRange(_context.UserFileAccesses);
-        _context.GroupFileAccesses.RemoveRange(_context.GroupFileAccesses);
-        _context.GroupMembers.RemoveRange(_context.GroupMembers);
-        _context.EncryptedFiles.RemoveRange(_context.EncryptedFiles);
-        _context.Groups.RemoveRange(_context.Groups);
-        _context.Users.RemoveRange(_context.Users);
-        await _context.SaveChangesAsync();
+        await _context.Database.ExecuteSqlRawAsync("DELETE FROM `UserFileAccess`;");
+        await _context.Database.ExecuteSqlRawAsync("DELETE FROM `GroupFileAccess`;");
+        await _context.Database.ExecuteSqlRawAsync("DELETE FROM `EncryptedFile`;");
+        await _context.Database.ExecuteSqlRawAsync("DELETE FROM `UserMember`;");
+        await _context.Database.ExecuteSqlRawAsync("DELETE FROM `GroupMember`;");
+         await _context.Database.ExecuteSqlRawAsync("DELETE FROM `User`;");
+        
         //clear everything before reset
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `User` AUTO_INCREMENT = 1;");
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `GroupMember` AUTO_INCREMENT = 1;");
