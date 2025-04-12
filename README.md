@@ -135,26 +135,6 @@ Each registered user has:
 
 - [X] Store metadata alongside encrypted file (encrypted AES keys for each group member, initialization vector)
 
-## System Architecture
-
-- [X] Login System 
-
-- [X] Group Management: Add/remove users and import/export public certificates
-
-- [X] File Manager:
-
-    - [X] Upload and encrypt files
-
-    - [ ]
-
-- Download/decrypt from cloud
-
-- Key Manager:
-
-    - [X] Load/import public/private keys (PFX, PEM)
-
-    - [X] Show group members and cert fingerprints
-
 
 
 ## Note
