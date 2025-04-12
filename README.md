@@ -2,117 +2,160 @@
 
 ## Features:
 
-- [X] Users can upload and download (if they gain access) files securely
+### Security Features:
 
-- [X] Uploaded files are encrypted using ...
+- [X] AES Encryption for Files: Files are encrypted using AES before being stored.
 
-- [] User Group Management
+- [X] RSA Encryption for Keys: AES keys are encrypted per user using each user’s public key (X.509 certificate).
 
-- [X] Public-Key Certificate-Based Key Sharing
+- [X] Metadata Management: Each file has a metadata file storing the IV and encrypted AES keys per user.
 
-- [ ] Integration with Cloud Storage APIs (Dropbox, Google Drive, Box, Office365)
+- [X] Master Key Encryption: AES keys are additionally encrypted and stored using a master key for backup and adding new members purpose.
 
-- [ ] Add Users Securely
+### User Access Management Features:
+
+- [X] User Accounts: Users can sign in and have unique identity through their email.
+
+- [X] User-Based File Access: File can be shared with an individual so this individual will have an encrypted AES key for future decryption.
+
+### Group Access Management Features:
+
+- [X] Group Creation: Admins can create named groups with selected members.
+
+- [X] Group Admin Role: Admins have edit and delete privileges within their group.
+
+- [X] Add/Remove Group Members: Edit group members dynamically.
+
+- [X] Group-Based File Access: Files can be shared with entire groups, not just individuals.
+
+- [X] Dynamic Key Distribution: When a new user is added to a group, AES keys for all previously shared files are encrypted for the new user automatically.
+
+### Group Access Management Features:
+
+- [X] File Upload: Upload files through a form.
+
+- [X] Multi-Recipient Access: Assign access to individual users or entire groups.
+
+- [X] File Encryption and Storage: Files are stored encrypted on the server-side storage.
+
+- [X] Download Access Control: Only authorized users can decrypt and download files.
+
+- [X] Unauthorized Access Protection: Unauthorized users can only see the files or download the encrypted version.
 
 
-## Project Structure (Pending)
+## Project Structure 
 
 ```
 SecureCloudStorage.sln
 │
-├── SecureCloudStorage.Web/              # MVC Web App
+├── SecureCloudStorage.Web/             
 │   ├── Controllers/
-|   |   ├── RegisterController.cs   #Register new user and add the new user to the database
-|   |   ├── SigninController.cs     #Sign in to an existing user
-|   |   ├── HomeController.cs       #Control the home page
-|   |   └── FileController.cs       #Manage file-processing tasks (uploading, downloading, encrypting, decrypting)
+|   |   ├── RegisterController.cs   #Control the registration for new user as well as the generation of the user certificates
+|   |   ├── SigninController.cs     #Control the sign in actions
+|   |   ├── HomeController.cs       #Control the home page and the navigation bar
+|   |   ├── GroupController.cs      #Control the group-scoped activities (creating new groups, adding or removing members, providing file access to a group, ...)
+|   |   └── FileController.cs       #Manage file-processing tasks (uploading, downloading, encrypting, decrypting, ...)
 │   ├── Models/
 |   |   ├── ErrorViewModel.cs
 |   |   ├── AdminViewModel.cs
 |   |   └── EncryptedFileViewModel.cs
-│   ├── Views/
+│   ├── Views/      #User Interface
 │   │   ├── Home/
+|   |   |   ├── Index.cshtml
+|   |   |   └── Privacy.cshtml
 │   │   ├── Files/
+|   |   |   ├── DisplayFiles.cshtml
 |   |   |   ├── Upload.cshtml
-|   |   |   └── 
+|   |   |   └── UploadSuccessfully.cshtml
+|   |   ├── Group/
+|   |   |   ├── AddGroup.cshtml
+|   |   |   ├── DeleteGroup.cshtml
+|   |   |   ├── DisplayGroup.cshtml
+|   |   |   └── EditGroup.cshtml
+|   |   ├── Register/
+|   |   |   ├── Register.cshtml
+|   |   |   └── RegisterSuccessfully.cshtml
+|   |   ├── Signin/
+|   |   |   └── Signin.cshtml
 │   │   └── Shared/
+|   |   |   ├── _Layout.cshtml
+|   |   |   ├── _Layout.cshtml.css
+|   |   |   ├── Error.cshtml.css
+|   |   |   └── _ValidationScriptsPartial.cshtml
 │   ├── wwwroot/                        
 │   ├── appsettings.json
+│   ├── appsettings.Develoipemnt.json
 │   └── Program.cs
-│
+|
 ├── SecureCloudStorage.Application/     
-|   ├── IEncryptionService.cs       # Interface for the Encryption Service
-|   ├── CertificateGenerationService.cs # Interface for the Encryption Service
-│   └── EncryptionService.cs           #Encryption and decryption uploaded and downloaded files
-├── SecureCloudStorage.Infrastructure/   # Secured Storage
-├── SecureCloudStorage.Domain/           
-|   ├── Entities/  #Binding with the MySQL Database
-|   |   ├── User.cs     #Binding with the User table (storing users' information)
-|   |   ├── Encrypted.cs #Binding with the User table (storing users' information)
-│   ├── FileMetadata.cs
-│   └── UserCertificate.cs
-└── SecureCloudStorage.Shared/           
-
+|   ├── IEncryptionService.cs      
+|   ├── EncryptionService.cs  
+|   ├── AesKeyService.cs
+│   └── CertificateGenerationService.cs   
+|
+├── SecureCloudStorage.Infrastructure/   #Secured Storage Accessed Only from Server Side
+|   ├── Data/
+|   |   └── AppDbContext.cs        
+|   ├── Storage/ 
+|   |   ├── uploads/    #Store encrypted version of the uploaded file
+|   |   ├── certs/      #Store users' certificates + public keys + metadata
+|   |   ├── certs-private/ #Store users' password-secured private keys
+|   |   ├── metada/ #Store users' password-secured private keys
+│   └── CertificateGenerationService.cs   
+| 
+└──  SecureCloudStorage.Domain/           
+    ├── Entities/  #Binding with the MySQL Database
+    |   ├── User.cs     #Binding with the User table (storing users' information)
+    |   ├── EncryptedFile.cs #Binding with the EncryptedFile table (storing encrypted uploaded files' information - file name, uploader, time)
+    |   ├── UserFileAccess.cs
+    |   ├── Group.cs    #Binding with the GroupMember table (storing groups' information)
+    |   ├── GroupMember.cs  #Binding with the UserMember table (linking users with their groups and indicating whether a user has admin right or not)
+    |   ├── GroupFileAccess.cs #Binding with the GroupFileAccess table (linking groups with the files that all members can access)
+    ├── FileMetadata.cs
+    └── UserCertificate.cs
 ```
 
 ## Cryptographic Design
 
 1. Hybrid Encryption Approach
 
-- [ ] Symmetric encryption (e.g., AES-256) for encrypting files (fast and secure).
+- [X] Symmetric encryption (AES-256) for encrypting files (fast and secure).
 
-- [ ] Asymmetric encryption (e.g., RSA or ECC) for encrypting the AES key per user using their public certificate.
+- [X] Asymmetric encryption (RSA) for encrypting the AES key per user using their public certificate.
 
 2. Key Management System
 
 Each registered user has:
 
-- [ ] A public/private key pair (e.g., using RSA)
+- [X] A public/private key pair (e.g., using RSA)
 
-- [ ] A self-signed digital certificate
+- [X] A self-signed digital certificate (securely stored at the server-side)
 
-- [ ] File encrypted with a random AES key 
+- [X] File encrypted with a random but consistent AES key 
 
-AES key encrypted with each group member’s public key
-
-- [ ] Store metadata alongside encrypted file (encrypted AES keys for each group member, initialization vector)
+- [X] Store metadata alongside encrypted file (encrypted AES keys for each group member, initialization vector)
 
 ## System Architecture
 
-
 - [X] Login System 
 
-Group Management UI: Add/remove users and import/export public certificates
+- [X] Group Management: Add/remove users and import/export public certificates
 
-- [ ] File Manager:
+- [X] File Manager:
 
-    - [ ] Select files
+    - [X] Upload and encrypt files
 
-Encrypt/upload to cloud
+    - [ ]
 
-Download/decrypt from cloud
+- Download/decrypt from cloud
 
-Key Manager:
+- Key Manager:
 
-Load/import public/private keys (PFX, PEM)
+    - [X] Load/import public/private keys (PFX, PEM)
 
-Show group members and cert fingerprints
-
-☁️ Cloud Integration
-Use official SDKs:
-
-Dropbox: Dropbox.Api
-
-Google Drive: Google.Apis.Drive.v3
-
-OneDrive/Office365: Microsoft.Graph
-
-Box: Box.V2
-
-
-Unlike wwwroot, files in Infrastructure/Storage/ are not accessible via HTTP — good! That’s exactly what we want for certs and sensitive encrypted files.
+    - [X] Show group members and cert fingerprints
 
 
 
-
+## Note
 Check password that generates .pfx: `openssl pkcs12 -in yourfile.pfx -info -nokeys`

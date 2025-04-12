@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecureCloudStorage.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5ad20d4ad9823b06aa22e30a10943309a1d0dcc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+128007db7281bd9bca96be0847f37a7855dfe48a")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecureCloudStorage.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecureCloudStorage.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

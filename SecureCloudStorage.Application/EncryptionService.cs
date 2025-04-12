@@ -12,7 +12,6 @@ public class EncryptionService: IEncryptionService{
     
     private readonly  IConfiguration configuration;
     private readonly string _secure_password ="Stolaf";
-    
     public EncryptionService(AESKeyService aes_service){
         _aes_service = aes_service;
     }
@@ -43,7 +42,7 @@ public class EncryptionService: IEncryptionService{
         SaveEncryptedAESKey(aes.Key, aesKeyPath, _aes_service.GetMasterKey());
 
         return (ms.ToArray(), new FileMetadata{
-            FileName = "encryptedFile.dat",
+            FileName = fileName,
             InitializationVector = aes.IV,
             EncryptedKeys = encryptedKeys,
             AesKeyPath = aesKeyPath       

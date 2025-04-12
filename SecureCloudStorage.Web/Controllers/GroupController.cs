@@ -10,6 +10,7 @@ using SecureCloudStorage.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Threading.Tasks;
 
 
 namespace SecureCloudStorage.Web.Controllers{
@@ -39,11 +40,12 @@ public class GroupController : Controller
         var curr_user =_context.Users
             .Where(u => u.Email == HttpContext.Session.GetString("Email"))
             .ToList();
-        if (model.MemberEmails.Length == 0 || model.MemberEmails.Length == 0 )
-            return View(model);
+    
 
-        var emails = model.MemberEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList();
-        var adminemails = model.AdminEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList();
+        var emails = new List<string>();
+        var adminemails = new List<string>();
+        if(!String.IsNullOrWhiteSpace(model.MemberEmails)) emails = model.MemberEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList();
+        if(!String.IsNullOrWhiteSpace(model.AdminEmails)) adminemails = model.AdminEmails.Split(new[] {',', ';', '\n'}, StringSplitOptions.RemoveEmptyEntries).Select(emails =>emails.Trim()).ToList();
         //return error if the emails are not in the database
         var members = _context.Users
             .Where(u => emails.Contains(u.Email))
@@ -274,41 +276,48 @@ public class GroupController : Controller
     }
 
     
-    public IActionResult DeleteGroup(int id){
-        var filesIdAccessed = _context.GroupFileAccesses.Where(u => u.GroupId == id).Select(u => u.FileId).ToList();
-        var usersIdAccessed = _context.GroupMembers.Where(u => u.GroupId == id).Select(u => u.UserId).ToList();
-        
-        //remove the file access of group
-        var groupFileAccesses = _context.GroupFileAccesses
-            .Where(g => g.GroupId == id)
-            .ToList();
+    public async Task<IActionResult> DeleteGroup(int id)
+    {
+        var filesIdAccessed = await _context.GroupFileAccesses
+            .Where(u => u.GroupId == id)
+            .Select(u => u.FileId)
+            .ToListAsync();
 
+        var usersIdAccessed = await _context.GroupMembers
+            .Where(u => u.GroupId == id)
+            .Select(u => u.UserId)
+            .ToListAsync();
+
+        // Remove file access entries for this group
+        var groupFileAccesses = await _context.GroupFileAccesses
+            .Where(g => g.GroupId == id)
+            .ToListAsync();
         _context.GroupFileAccesses.RemoveRange(groupFileAccesses);
 
-        //remove the users of group
-        var userGroup = _context.GroupMembers
+        // Remove users from the group
+        var userGroup = await _context.GroupMembers
             .Where(g => g.GroupId == id)
-            .ToList();
-
+            .ToListAsync();
         _context.GroupMembers.RemoveRange(userGroup);
 
-        //remove the file access of user
-        var fileUser = _context.UserFileAccesses
-            .Where(g => usersIdAccessed.Contains(g.UserId) && filesIdAccessed.Contains(g.FileId))
-            .ToList();
+        // Remove user access to files that were accessed via this group
+        var fileUserAccess = await _context.UserFileAccesses
+            .Where(u => usersIdAccessed.Contains(u.UserId) && filesIdAccessed.Contains(u.FileId))
+            .ToListAsync();
+        _context.UserFileAccesses.RemoveRange(fileUserAccess);
 
-        _context.UserFileAccesses.RemoveRange(fileUser);
-
-        var group = _context.Groups.FirstOrDefault(u => u.Id == id);
-        //remove the group
+        // Remove the group itself
+        var group = await _context.Groups.FirstOrDefaultAsync(u => u.Id == id);
         if (group != null)
         {
             _context.Groups.Remove(group);
         }
-        
-        _context.SaveChanges();
 
-        return View();
+        await _context.SaveChangesAsync();
+
+        TempData["Message"] = "✅ Group and related access have been deleted.";
+        return RedirectToAction("DisplayGroup");
     }
+
 }
 }

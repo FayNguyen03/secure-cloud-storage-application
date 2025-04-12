@@ -37,11 +37,16 @@ public class FileController : Controller
 
         var (encryptedFile, metadata) = _encryptionService.EncryptFile(file.FileName, fileBytes, recipients);
 
+        var safeMetadata = new {
+            FileName = metadata.FileName,
+            InitializationVector = metadata.InitializationVector,
+            AesKeyPath = metadata.AesKeyPath
+        };
         Directory.CreateDirectory(Path.GetDirectoryName(filePath)!);
         System.IO.File.WriteAllBytes(filePath, encryptedFile);
 
         Directory.CreateDirectory(Path.GetDirectoryName(metadataPath)!);
-        System.IO.File.WriteAllText(metadataPath, JsonSerializer.Serialize(metadata));
+        System.IO.File.WriteAllText(metadataPath, JsonSerializer.Serialize(safeMetadata));
 
         var encryptedFileEntry = new EncryptedFile
         {
@@ -91,8 +96,19 @@ public class FileController : Controller
     [HttpPost]
     public async Task<IActionResult> Upload(EncryptedFileViewModel model)
     {
-        var uploader = _context.Users
-            .FirstOrDefault(u => u.Email == HttpContext.Session.GetString("Email"));
+        var email = HttpContext.Session.GetString("Email");
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            TempData["Error"] = "You must be logged in to upload files.";
+            return RedirectToAction("Signin", "Signin");
+        }
+
+        var uploader = _context.Users.FirstOrDefault(u => u.Email == email);
+        if (uploader == null)
+        {
+            TempData["Error"] = "Uploader account not found.";
+            return RedirectToAction("Signin", "Signin");
+        }
 
         var storageBase = Path.Combine(Directory.GetCurrentDirectory(), "../SecureCloudStorage.Infrastructure", "Storage");
         //a recipient email is inputted
@@ -155,91 +171,91 @@ public class FileController : Controller
     }
     public IActionResult UploadSuccessfully() => View();
     public IActionResult Download(int id)
-{
-    var userEmail = HttpContext.Session.GetString("Email");
-    Console.WriteLine($"File ID: {id}");
-
-    if (userEmail == null)
     {
-        return RedirectToAction("Signin", "Signin"); 
-    }
+        var userEmail = HttpContext.Session.GetString("Email");
+        Console.WriteLine($"File ID: {id}");
 
-    var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
-    if (user == null)
-    {
-        ViewBag.error = "Access denied";
-        return View(); 
-    }
+        if (userEmail == null)
+        {
+            return RedirectToAction("Signin", "Signin"); 
+        }
 
-    var access = _context.UserFileAccesses.FirstOrDefault(x => x.UserId == user.Id && x.FileId == id);
-    if (access == null)
-    {
-        ViewBag.error = "Access denied";
-        return Unauthorized("No permission to decrypt and download");
-    }
+        var user = _context.Users.FirstOrDefault(u => u.Email == userEmail);
+        if (user == null)
+        {
+            ViewBag.error = "Access denied";
+            return View(); 
+        }
 
-    var file = _context.EncryptedFiles.FirstOrDefault(f => f.Id == id);
-    if (file == null)
-    {
-        ViewBag.error = "File Not Found";
-        return NotFound("File not found.");
-    }
+        var access = _context.UserFileAccesses.FirstOrDefault(x => x.UserId == user.Id && x.FileId == id);
+        if (access == null)
+        {
+            ViewBag.error = "Access denied";
+            return Unauthorized("No permission to decrypt and download");
+        }
 
-    if (!System.IO.File.Exists(file.EncryptedPath))
-    {
-        return NotFound("Encrypted file does not exist on server.");
-    }
+        var file = _context.EncryptedFiles.FirstOrDefault(f => f.Id == id);
+        if (file == null)
+        {
+            ViewBag.error = "File Not Found";
+            return NotFound("File not found.");
+        }
 
-    var encryptedBytes = System.IO.File.ReadAllBytes(file.EncryptedPath);
+        if (!System.IO.File.Exists(file.EncryptedPath))
+        {
+            return NotFound("Encrypted file does not exist on server.");
+        }
 
-    var privateKeyPath = Path.Combine(
-        Directory.GetCurrentDirectory(),
-        "../SecureCloudStorage.Infrastructure/Storage/certs-private",
-        $"{user.Email}.pfx"
-    );
+        var encryptedBytes = System.IO.File.ReadAllBytes(file.EncryptedPath);
 
-    if (!System.IO.File.Exists(privateKeyPath))
-    {
-        ViewBag.error = "Private key not found for this user";
-        return NotFound("Private Key Not Found");
-    }
-
-    var privateKey  = System.IO.File.ReadAllBytes(privateKeyPath);
-
-    var jsonString = System.IO.File.ReadAllText(file.MetadataPath);
-
-    FileMetadata metadata;
-    try
-    {
-        metadata = JsonSerializer.Deserialize<FileMetadata>(jsonString);
-    }
-    catch (Exception ex)
-    {
-        return BadRequest($"Failed to parse metadata: {ex.Message}");
-    }
-
-    if (metadata == null || metadata.InitializationVector == null)
-    {
-        return BadRequest("Invalid or missing metadata");
-    }
-
-    byte[] decryptedBytes;
-    try
-    {
-        decryptedBytes = _encryptionService.DecryptFile(
-            encryptedBytes,
-            metadata.InitializationVector,
-            access.EncryptedAesKey,
-            privateKey
+        var privateKeyPath = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "../SecureCloudStorage.Infrastructure/Storage/certs-private",
+            $"{user.Email}.pfx"
         );
-    }
-    catch (Exception ex)
-    {
-        return BadRequest($"Decryption failed: {ex.Message}");
-    }
 
-    return File(decryptedBytes, "application/octet-stream", file.FileName);
-}
+        if (!System.IO.File.Exists(privateKeyPath))
+        {
+            ViewBag.error = "Private key not found for this user";
+            return NotFound("Private Key Not Found");
+        }
+
+        var privateKey  = System.IO.File.ReadAllBytes(privateKeyPath);
+
+        var jsonString = System.IO.File.ReadAllText(file.MetadataPath);
+
+        FileMetadata metadata;
+        try
+        {
+            metadata = JsonSerializer.Deserialize<FileMetadata>(jsonString);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Failed to parse metadata: {ex.Message}");
+        }
+
+        if (metadata == null || metadata.InitializationVector == null)
+        {
+            return BadRequest("Invalid or missing metadata");
+        }
+
+        byte[] decryptedBytes;
+        try
+        {
+            decryptedBytes = _encryptionService.DecryptFile(
+                encryptedBytes,
+                metadata.InitializationVector,
+                access.EncryptedAesKey,
+                privateKey
+            );
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Decryption failed: {ex.Message}");
+        }
+
+        return File(decryptedBytes, "application/octet-stream", file.FileName);
+    }
 
        
 }

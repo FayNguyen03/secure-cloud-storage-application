@@ -48,10 +48,12 @@ public class HomeController : Controller
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `User` AUTO_INCREMENT = 1;");
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `GroupMember` AUTO_INCREMENT = 1;");
         await _context.Database.ExecuteSqlRawAsync("ALTER TABLE `EncryptedFile` AUTO_INCREMENT = 1;");
-
+        HttpContext.Session.Remove("User");
+        HttpContext.Session.Remove("Email");
+        HttpContext.Session.Remove("Id");
         TempData["Message"] = "☢️ Everything has been wiped!";
         
-        return RedirectToAction(actionName:"LogOut", controllerName:"Home");
+        return RedirectToAction("Index");
     }
      [HttpPost]
     public IActionResult LogOut()
